@@ -4,11 +4,25 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 
 const burger = (props) => {
+
+     //    js Object to extract keys of the object passed in. This will give us the array of ingredients. 
+    const transformedIngredients = Object.keys(props.ingredients)
+    .map(ingredientKey => {
+
+
+        // The map method is used to execute a function on each element in the array 
+        return [...Array(props.ingredients[ingredientKey])].map((_, i) => {
+        // Use the spread (...) operator and Array method to create an array. 
+        // The map method is used to map the elements to each value. and then returns the burger ingredient component.
+               return  <BurgerIngredient key={ingredientKey + i} type={ingredientKey} />;
+        });
+    });
+    //End of transformIngredients function 
+
         return(
             <div className={classes.Burger}>
                 <BurgerIngredient type="bread-top"/>
-                <BurgerIngredient type="cheese"/>
-                <BurgerIngredient type="meat"/>
+                {transformedIngredients}
                 <BurgerIngredient type="bread-bottom"/>
             </div>
         );
